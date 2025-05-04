@@ -1,15 +1,13 @@
 "use client";
 
-import { useParams } from "next/navigation";
 import { useGetMessage } from "@/app/utils/useGetMessages";
 import { Button } from "@/components/ui/button";
 import { useCreateMessages } from "@/app/utils/useCreateMessages";
 import { useEffect, useRef, useState } from "react";
-import Navbar from "@/components/navbar";
 
-export default function RoomChat() {
-  const { name } = useParams();
-  const { data, isLoading, isError } = useGetMessage(name as string);
+export default function RoomChat({ name }: { name: string }) {
+  console.log(name);
+  const { data, isLoading, isError } = useGetMessage(name);
   const [message, setMessage] = useState("");
   const { mutate } = useCreateMessages();
 
@@ -48,12 +46,10 @@ export default function RoomChat() {
   };
 
   if (isLoading) return <div className="text-center mt-8">Loading messages...</div>;
-  if (isError) return <div className="text-center text-red-500 mt-8">Failed to load messages.</div>;
+  if (isError) return <div className="text-center text-red-500 mt-8">Error : ${isError}</div>;
 
   return (
     <div className="flex flex-col h-screen bg-[#e5ddd5]">
-      <Navbar />
-
       {/* Chat area */}
       <div className="flex-1 overflow-y-auto px-4 py-6 space-y-3">
         {messages.map((msg, idx) => {
@@ -62,7 +58,7 @@ export default function RoomChat() {
             <div key={idx} className={`flex ${isDoctor ? "justify-start" : "justify-end"}`}>
               <div className={`max-w-[70%] px-4 py-2 rounded-2xl shadow text-sm whitespace-pre-wrap ${isDoctor ? "bg-white text-gray-800 rounded-tl-none" : "bg-green-500 text-white rounded-tr-none"}`}>
                 {msg.content}
-                <div className={`text-[10px] mt-1 ${isDoctor ? "text-gray-500" : "text-green-100"}`}>{new Date(msg.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</div>
+                <div className={`text-[10px] mt-1 ${!isDoctor ? "text-gray-500" : "text-green-100"}`}>{new Date(msg.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</div>
               </div>
             </div>
           );

@@ -2157,21 +2157,18 @@ export namespace Prisma {
     id: string | null
     name: string | null
     createdAt: Date | null
-    userId: string | null
   }
 
   export type RoomChatMaxAggregateOutputType = {
     id: string | null
     name: string | null
     createdAt: Date | null
-    userId: string | null
   }
 
   export type RoomChatCountAggregateOutputType = {
     id: number
     name: number
     createdAt: number
-    userId: number
     _all: number
   }
 
@@ -2180,21 +2177,18 @@ export namespace Prisma {
     id?: true
     name?: true
     createdAt?: true
-    userId?: true
   }
 
   export type RoomChatMaxAggregateInputType = {
     id?: true
     name?: true
     createdAt?: true
-    userId?: true
   }
 
   export type RoomChatCountAggregateInputType = {
     id?: true
     name?: true
     createdAt?: true
-    userId?: true
     _all?: true
   }
 
@@ -2274,7 +2268,6 @@ export namespace Prisma {
     id: string
     name: string
     createdAt: Date
-    userId: string
     _count: RoomChatCountAggregateOutputType | null
     _min: RoomChatMinAggregateOutputType | null
     _max: RoomChatMaxAggregateOutputType | null
@@ -2298,7 +2291,6 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     createdAt?: boolean
-    userId?: boolean
     messages?: boolean | RoomChat$messagesArgs<ExtArgs>
     _count?: boolean | RoomChatCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["roomChat"]>
@@ -2307,24 +2299,21 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     createdAt?: boolean
-    userId?: boolean
   }, ExtArgs["result"]["roomChat"]>
 
   export type RoomChatSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     createdAt?: boolean
-    userId?: boolean
   }, ExtArgs["result"]["roomChat"]>
 
   export type RoomChatSelectScalar = {
     id?: boolean
     name?: boolean
     createdAt?: boolean
-    userId?: boolean
   }
 
-  export type RoomChatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "userId", ExtArgs["result"]["roomChat"]>
+  export type RoomChatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt", ExtArgs["result"]["roomChat"]>
   export type RoomChatInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     messages?: boolean | RoomChat$messagesArgs<ExtArgs>
     _count?: boolean | RoomChatCountOutputTypeDefaultArgs<ExtArgs>
@@ -2341,7 +2330,6 @@ export namespace Prisma {
       id: string
       name: string
       createdAt: Date
-      userId: string
     }, ExtArgs["result"]["roomChat"]>
     composites: {}
   }
@@ -2769,7 +2757,6 @@ export namespace Prisma {
     readonly id: FieldRef<"RoomChat", 'String'>
     readonly name: FieldRef<"RoomChat", 'String'>
     readonly createdAt: FieldRef<"RoomChat", 'DateTime'>
-    readonly userId: FieldRef<"RoomChat", 'String'>
   }
     
 
@@ -4291,8 +4278,7 @@ export namespace Prisma {
   export const RoomChatScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    createdAt: 'createdAt',
-    userId: 'userId'
+    createdAt: 'createdAt'
   };
 
   export type RoomChatScalarFieldEnum = (typeof RoomChatScalarFieldEnum)[keyof typeof RoomChatScalarFieldEnum]
@@ -4422,7 +4408,6 @@ export namespace Prisma {
     id?: StringFilter<"RoomChat"> | string
     name?: StringFilter<"RoomChat"> | string
     createdAt?: DateTimeFilter<"RoomChat"> | Date | string
-    userId?: StringFilter<"RoomChat"> | string
     messages?: MessageListRelationFilter
   }
 
@@ -4430,7 +4415,6 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     createdAt?: SortOrder
-    userId?: SortOrder
     messages?: MessageOrderByRelationAggregateInput
   }
 
@@ -4441,7 +4425,6 @@ export namespace Prisma {
     OR?: RoomChatWhereInput[]
     NOT?: RoomChatWhereInput | RoomChatWhereInput[]
     createdAt?: DateTimeFilter<"RoomChat"> | Date | string
-    userId?: StringFilter<"RoomChat"> | string
     messages?: MessageListRelationFilter
   }, "id" | "name">
 
@@ -4449,7 +4432,6 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     createdAt?: SortOrder
-    userId?: SortOrder
     _count?: RoomChatCountOrderByAggregateInput
     _max?: RoomChatMaxOrderByAggregateInput
     _min?: RoomChatMinOrderByAggregateInput
@@ -4462,7 +4444,6 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"RoomChat"> | string
     name?: StringWithAggregatesFilter<"RoomChat"> | string
     createdAt?: DateTimeWithAggregatesFilter<"RoomChat"> | Date | string
-    userId?: StringWithAggregatesFilter<"RoomChat"> | string
   }
 
   export type MessageWhereInput = {
@@ -4566,7 +4547,6 @@ export namespace Prisma {
     id?: string
     name: string
     createdAt?: Date | string
-    userId: string
     messages?: MessageCreateNestedManyWithoutRoomChatInput
   }
 
@@ -4574,7 +4554,6 @@ export namespace Prisma {
     id?: string
     name: string
     createdAt?: Date | string
-    userId: string
     messages?: MessageUncheckedCreateNestedManyWithoutRoomChatInput
   }
 
@@ -4582,7 +4561,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
     messages?: MessageUpdateManyWithoutRoomChatNestedInput
   }
 
@@ -4590,7 +4568,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
     messages?: MessageUncheckedUpdateManyWithoutRoomChatNestedInput
   }
 
@@ -4598,21 +4575,18 @@ export namespace Prisma {
     id?: string
     name: string
     createdAt?: Date | string
-    userId: string
   }
 
   export type RoomChatUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type RoomChatUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageCreateInput = {
@@ -4742,21 +4716,18 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     createdAt?: SortOrder
-    userId?: SortOrder
   }
 
   export type RoomChatMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     createdAt?: SortOrder
-    userId?: SortOrder
   }
 
   export type RoomChatMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     createdAt?: SortOrder
-    userId?: SortOrder
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -5089,14 +5060,12 @@ export namespace Prisma {
     id?: string
     name: string
     createdAt?: Date | string
-    userId: string
   }
 
   export type RoomChatUncheckedCreateWithoutMessagesInput = {
     id?: string
     name: string
     createdAt?: Date | string
-    userId: string
   }
 
   export type RoomChatCreateOrConnectWithoutMessagesInput = {
@@ -5134,14 +5103,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type RoomChatUncheckedUpdateWithoutMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUpsertWithoutMessagesInput = {

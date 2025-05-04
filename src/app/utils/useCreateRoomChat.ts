@@ -13,7 +13,7 @@ export const useCreateMessages = () => {
       return response.data;
     },
     onSuccess: () => {
-      console.log("Success booking");
+      console.log("Success creating room chat");
       queryClient.invalidateQueries({ queryKey: ["messages"] });
     },
     onError: (error) => {

@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { useGetAllMessages } from "@/app/utils/useGetAllMessages";
-import ChatRoomDoctor from "@/components/chatroomdoctor";
+
+import Link from "next/link";
 import { useState } from "react";
 
 interface ChatRoom {
@@ -21,15 +22,11 @@ interface ChatRoom {
 export default function DoctorPage() {
   const { data: chatRooms, isLoading, isError } = useGetAllMessages();
   const [selectedRoomName, setSelectedRoomName] = useState<string>("");
-
   console.log(selectedRoomName);
+  // selectedRoomName set to params
 
   if (isLoading) {
     return <div className="text-center mt-8">Loading chat rooms...</div>;
-  }
-
-  if (isError || !Array.isArray(chatRooms)) {
-    return <div className="text-center text-red-500 mt-8">Failed to load chat rooms.</div>;
   }
 
   return (
@@ -40,16 +37,18 @@ export default function DoctorPage() {
           <h2 className="text-lg font-semibold mb-4">Chats</h2>
           <div className="flex flex-col space-y-2">
             {chatRooms.map((room: ChatRoom) => (
-              <Button key={room.id} variant="outline" className="w-full" onClick={() => setSelectedRoomName(room.name)}>
-                {room.name}
-              </Button>
+              <div key={room.id} className="w-full">
+                <Link href={`/chatdoctor/${selectedRoomName}`}>
+                  <Button key={room.id} variant="outline" className="w-full" onClick={() => setSelectedRoomName(room.name)}>
+                    {room.name}
+                  </Button>
+                </Link>
+              </div>
             ))}
           </div>
         </div>
 
         {/* Chat Room */}
-        <div className="w-3/4 bg-white p-4">{selectedRoomName ? <ChatRoomDoctor name={selectedRoomName} /> : <div className="text-center text-gray-500">Select a chat room to view messages.</div>}</div>
-        {/* <ChatRoomDoctor name={selectedRoomName} /> */}
       </div>
     </div>
   );

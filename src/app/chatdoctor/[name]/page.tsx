@@ -5,7 +5,7 @@ import { useGetMessage } from "@/app/utils/useGetMessages";
 import { Button } from "@/components/ui/button";
 import { useCreateMessages } from "@/app/utils/useCreateMessages";
 import { useEffect, useRef, useState } from "react";
-import Navbar from "@/components/navbar";
+import NavDoctor from "@/components/navdoctor";
 
 export default function RoomChat() {
   const { name } = useParams();
@@ -52,7 +52,7 @@ export default function RoomChat() {
 
   return (
     <div className="flex flex-col h-screen bg-[#e5ddd5]">
-      <Navbar />
+      <NavDoctor />
 
       {/* Chat area */}
       <div className="flex-1 overflow-y-auto px-4 py-6 space-y-3">

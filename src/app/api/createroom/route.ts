@@ -6,6 +6,19 @@ export async function POST(request: Request) {
     const response = await prisma.roomChat.create({
       data: {
         name: name,
+        messages: {
+          create: [
+            {
+              content: `izin memperkenalkan diri nama saya ${name}, saya ingin mengobrol dengan dokter tentang kesehatan saya`,
+              user: {
+                connectOrCreate: {
+                  where: { id: "defaultUserId" }, // Replace with actual user ID or logic
+                  create: { name: name },
+                },
+              },
+            },
+          ],
+        },
       },
     });
     return new Response(JSON.stringify(response), {

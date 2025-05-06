@@ -1,6 +1,6 @@
 // useCreateBook.js
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios"; // optional, kalau mau pakai toast
+import axios from "axios";
 
 interface createRoomChatPayload {
   name: string;
@@ -15,22 +15,20 @@ interface createRoomChatPayload {
   }[];
 }
 
-export const useCreateMessages = () => {
+export const useFindRoomChat = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: async (json: createRoomChatPayload) => {
-      // <<< tambahkan 'json' di sini
-      const response = await axios.post("/api/roomchat", json);
-      console.log(response);
+    mutationFn: async (payload: { name: string }) => {
+      const response = await axios.post("/api/findroom", payload);
       return response.data;
     },
     onSuccess: () => {
-      console.log("Success creating room chat");
+      console.log("Room found or created");
       queryClient.invalidateQueries({ queryKey: ["messages"] });
     },
     onError: (error) => {
-      console.error("Error: ", error);
+      console.error("Error finding/creating room chat:", error);
     },
   });
 

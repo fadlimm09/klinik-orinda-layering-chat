@@ -35,7 +35,14 @@ export default function DoctorPage() {
       <div className="flex flex-row w-full h-full">
         {/* Sidebar */}
         <div className="w-full bg-gray-100 p-4">
-          <h2 className="text-lg font-semibold mb-4">Chats</h2>
+          <div className="flex  items-center mb-4">
+            <Link href="https://klinik-orinda-nu.vercel.app/admin">
+              <Button className="w-full mb-4">
+                <span className="text-center">Back</span>
+              </Button>
+            </Link>
+            <h2 className="text-lg font-semibold mb-4">Chats</h2>
+          </div>
           <div className="flex flex-col space-y-2">
             {Array.isArray(chatRooms) &&
               chatRooms.map((room: ChatRoom) => (

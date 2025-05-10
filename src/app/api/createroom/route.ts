@@ -1,11 +1,12 @@
 import prisma from "@/lib/prisma";
 
 export async function POST(request: Request) {
-  const { name } = await request.json();
+  const { name, doctor } = await request.json();
   try {
     const response = await prisma.roomChat.create({
       data: {
         name: name,
+        doctor: doctor,
         messages: {
           create: [
             {

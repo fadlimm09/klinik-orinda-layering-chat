@@ -4,6 +4,7 @@ import axios from "axios"; // optional, kalau mau pakai toast
 
 interface createRoomChatPayload {
   name: string;
+  doctor: string;
   id: string;
   messages: {
     id: string;

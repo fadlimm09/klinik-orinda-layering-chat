@@ -2,11 +2,17 @@ import { type NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
-  const { name } = await request.json();
   try {
-    const response = await prisma.roomChat.findUnique({
+    const { name, doctor } = await request.json();
+
+    if (!name || !doctor) {
+      return new Response("Missing required fields: name or doctor", { status: 400 });
+    }
+
+    const response = await prisma.roomChat.findFirst({
       where: {
         name: name,
+        doctor: doctor,
       },
       include: {
         messages: {
@@ -16,6 +22,11 @@ export async function POST(request: NextRequest) {
         },
       },
     });
+
+    if (!response) {
+      return new Response("Room chat not found", { status: 404 });
+    }
+
     return new Response(JSON.stringify(response), {
       status: 200,
       headers: {
@@ -29,13 +40,19 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
-  const { id } = await request.json();
   try {
+    const { id } = await request.json();
+
+    if (!id) {
+      return new Response("Missing required field: id", { status: 400 });
+    }
+
     const response = await prisma.roomChat.delete({
       where: {
         id: id,
       },
     });
+
     return new Response(JSON.stringify(response), {
       status: 200,
       headers: {
@@ -59,6 +76,7 @@ export async function GET(request: NextRequest) {
         },
       },
     });
+
     return new Response(JSON.stringify(response), {
       status: 200,
       headers: {

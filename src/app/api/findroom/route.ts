@@ -1,13 +1,13 @@
 import { NextRequest } from "next/server";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import prisma from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
-  const { name } = await req.json(); // usually user name or custom room name
+  const { name, doctor } = await req.json();
 
   try {
-    // 1. Check if room already exists
-    let existingRoom = await prisma.roomChat.findUnique({
-      where: { name },
+    let existingRoom = await prisma.roomChat.findFirst({
+      where: { name, doctor },
       include: {
         messages: {
           include: { user: true },
@@ -15,7 +15,6 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // 2. If it exists, return it
     if (existingRoom) {
       return new Response(JSON.stringify(existingRoom), {
         status: 200,
@@ -23,40 +22,56 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // 3. If not, create new room
-    if (!existingRoom) {
-      try {
-        const response = await prisma.roomChat.create({
-          data: {
-            name: name,
-            messages: {
-              create: [
-                {
-                  content: `izin memperkenalkan diri nama saya ${name}, saya ingin mengobrol dengan dokter tentang kesehatan saya`,
-                  user: {
-                    connectOrCreate: {
-                      where: { id: "defaultUserId" }, // Replace with actual user ID or logic
-                      create: { name: name },
-                    },
-                  },
+    const newRoom = await prisma.roomChat.create({
+      data: {
+        name,
+        doctor,
+        messages: {
+          create: [
+            {
+              content: `izin memperkenalkan diri nama saya ${name}, saya ingin mengobrol dengan dokter tentang kesehatan saya`,
+              user: {
+                connectOrCreate: {
+                  where: { id: "defaultUserId" },
+                  create: { name },
                 },
-              ],
+              },
             },
+          ],
+        },
+      },
+      include: {
+        messages: {
+          include: { user: true },
+        },
+      },
+    });
+
+    return new Response(JSON.stringify(newRoom), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
+      // Duplicate room (race condition) — ambil ulang datanya
+      const existingRoom = await prisma.roomChat.findFirst({
+        where: { name, doctor },
+        include: {
+          messages: {
+            include: { user: true },
           },
-        });
-        return new Response(JSON.stringify(response), {
+        },
+      });
+
+      if (existingRoom) {
+        return new Response(JSON.stringify(existingRoom), {
           status: 200,
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         });
-      } catch (error) {
-        console.error("Error creating room chat:", error);
-        return new Response("Internal Server Error", { status: 500 });
       }
     }
-  } catch (error) {
-    console.error("Error in RoomChat creation:", error);
+
+    console.error("Error creating room chat:", error);
     return new Response("Internal Server Error", { status: 500 });
   }
 }

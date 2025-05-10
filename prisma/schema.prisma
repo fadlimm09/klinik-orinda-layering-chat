@@ -1,14 +1,12 @@
 generator client {
-  provider = "prisma-client-js"
- output = "../generated/prisma_client"
-   binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+  provider      = "prisma-client-js"
+  output        = "../generated/prisma_client"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-
-  
 }
 
 model User {
@@ -19,9 +17,12 @@ model User {
 
 model RoomChat {
   id        String    @id @default(cuid())
-  name      String    @unique
+  name      String    
+  doctor    String     
   createdAt DateTime  @default(now())
   messages  Message[]
+
+  @@unique([name, doctor]) // UNIQUE untuk kombinasi, bukan satu field saja
 }
 
 model Message {

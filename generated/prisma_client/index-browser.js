@@ -128,8 +128,8 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.RoomChatScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  doctor: 'doctor',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  doctor: 'doctor'
 };
 
 exports.Prisma.MessageScalarFieldEnum = {

@@ -6,10 +6,11 @@ import { Button } from "@/components/ui/button";
 import { useCreateMessages } from "@/app/utils/useCreateMessages";
 import { useEffect, useRef, useState } from "react";
 import Navbar from "@/components/navbar";
+import Image from "next/image";
 
 export default function RoomChat() {
-  const { name } = useParams();
-  const { data, isLoading, isError } = useGetMessage(name as string);
+  const { name, doctor } = useParams();
+  const { data, isLoading, isError } = useGetMessage(name as string, doctor as string);
   const [message, setMessage] = useState("");
   const { mutate } = useCreateMessages();
 
@@ -53,6 +54,17 @@ export default function RoomChat() {
   return (
     <div className="flex flex-col h-screen bg-[#e5ddd5]">
       <Navbar />
+
+      {/* Doctor Header */}
+      <div className="bg-white shadow-sm py-3 px-4 flex items-center gap-3 ">
+        <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-200">
+          <Image src="/doctor-avatar.jpg" alt={`Doctor ${doctor}`} fill className="object-cover" />
+        </div>
+        <div>
+          <h2 className="font-semibold text-gray-800">Dr. {doctor}</h2>
+          <p className="text-xs text-gray-500">Online</p>
+        </div>
+      </div>
 
       {/* Chat area */}
       <div className="flex-1 overflow-y-auto px-4 py-6 space-y-3">

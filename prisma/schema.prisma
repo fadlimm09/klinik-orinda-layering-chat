@@ -17,12 +17,12 @@ model User {
 
 model RoomChat {
   id        String    @id @default(cuid())
-  name      String    
-  doctor    String     
+  name      String
   createdAt DateTime  @default(now())
+  doctor    String
   messages  Message[]
 
-  @@unique([name, doctor]) // UNIQUE untuk kombinasi, bukan satu field saja
+  @@unique([name, doctor])
 }
 
 model Message {

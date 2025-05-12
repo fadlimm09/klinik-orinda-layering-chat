@@ -1,4 +1,4 @@
-// components/Modal.tsx
+"use client";
 import { useModalStore } from "@/app/store/useModalDoctorStore";
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -11,9 +11,9 @@ export default function Modal() {
   const { isOpen, closeModal, setDoctor } = useModalStore();
 
   const dataDoctor = [
-    { id: 1, name: "dr. H. Agah Nugraha, M.k.M", specialty: "Dokter Umum", image: dokterAgah },
-    { id: 2, name: "dr. Hj. Dessy Susanti, M.K.M", specialty: "Dokter Umum", image: dokterDesy },
-    { id: 3, name: "drg. Ono Sumarno", specialty: "Dokter Gigi", image: dokterOno },
+    { id: 1, name: "dr. H. Agah Nugraha, M.k.M", specialty: "Dokter Umum", image: dokterAgah, aliases: "dokterAgah" },
+    { id: 2, name: "dr. Hj. Dessy Susanti, M.K.M", specialty: "Dokter Umum", image: dokterDesy, aliases: "dokterDesy" },
+    { id: 3, name: "drg. Ono Sumarno", specialty: "Dokter Gigi", image: dokterOno, aliases: "dokterOno" },
   ];
 
   if (!isOpen) return null;
@@ -32,7 +32,7 @@ export default function Modal() {
               onClick={() => {
                 // Handle doctor selection
                 console.log(`Selected doctor: ${doctor.name}`);
-                setDoctor(doctor.name);
+                setDoctor(doctor.aliases);
                 closeModal();
               }}
               className="p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 borderborder-green-200"

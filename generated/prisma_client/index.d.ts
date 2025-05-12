@@ -48,6 +48,7 @@ export class PrismaClient<
   U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
   ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
 > {
+  doctor: any;
   [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
 
     /**
@@ -2156,22 +2157,22 @@ export namespace Prisma {
   export type RoomChatMinAggregateOutputType = {
     id: string | null
     name: string | null
-    doctor: string | null
     createdAt: Date | null
+    doctor: string | null
   }
 
   export type RoomChatMaxAggregateOutputType = {
     id: string | null
     name: string | null
-    doctor: string | null
     createdAt: Date | null
+    doctor: string | null
   }
 
   export type RoomChatCountAggregateOutputType = {
     id: number
     name: number
-    doctor: number
     createdAt: number
+    doctor: number
     _all: number
   }
 
@@ -2179,22 +2180,22 @@ export namespace Prisma {
   export type RoomChatMinAggregateInputType = {
     id?: true
     name?: true
-    doctor?: true
     createdAt?: true
+    doctor?: true
   }
 
   export type RoomChatMaxAggregateInputType = {
     id?: true
     name?: true
-    doctor?: true
     createdAt?: true
+    doctor?: true
   }
 
   export type RoomChatCountAggregateInputType = {
     id?: true
     name?: true
-    doctor?: true
     createdAt?: true
+    doctor?: true
     _all?: true
   }
 
@@ -2273,8 +2274,8 @@ export namespace Prisma {
   export type RoomChatGroupByOutputType = {
     id: string
     name: string
-    doctor: string
     createdAt: Date
+    doctor: string
     _count: RoomChatCountAggregateOutputType | null
     _min: RoomChatMinAggregateOutputType | null
     _max: RoomChatMaxAggregateOutputType | null
@@ -2297,8 +2298,8 @@ export namespace Prisma {
   export type RoomChatSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    doctor?: boolean
     createdAt?: boolean
+    doctor?: boolean
     messages?: boolean | RoomChat$messagesArgs<ExtArgs>
     _count?: boolean | RoomChatCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["roomChat"]>
@@ -2306,25 +2307,25 @@ export namespace Prisma {
   export type RoomChatSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    doctor?: boolean
     createdAt?: boolean
+    doctor?: boolean
   }, ExtArgs["result"]["roomChat"]>
 
   export type RoomChatSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    doctor?: boolean
     createdAt?: boolean
+    doctor?: boolean
   }, ExtArgs["result"]["roomChat"]>
 
   export type RoomChatSelectScalar = {
     id?: boolean
     name?: boolean
-    doctor?: boolean
     createdAt?: boolean
+    doctor?: boolean
   }
 
-  export type RoomChatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "doctor" | "createdAt", ExtArgs["result"]["roomChat"]>
+  export type RoomChatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "doctor", ExtArgs["result"]["roomChat"]>
   export type RoomChatInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     messages?: boolean | RoomChat$messagesArgs<ExtArgs>
     _count?: boolean | RoomChatCountOutputTypeDefaultArgs<ExtArgs>
@@ -2340,8 +2341,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
-      doctor: string
       createdAt: Date
+      doctor: string
     }, ExtArgs["result"]["roomChat"]>
     composites: {}
   }
@@ -2768,8 +2769,8 @@ export namespace Prisma {
   interface RoomChatFieldRefs {
     readonly id: FieldRef<"RoomChat", 'String'>
     readonly name: FieldRef<"RoomChat", 'String'>
-    readonly doctor: FieldRef<"RoomChat", 'String'>
     readonly createdAt: FieldRef<"RoomChat", 'DateTime'>
+    readonly doctor: FieldRef<"RoomChat", 'String'>
   }
     
 
@@ -4291,8 +4292,8 @@ export namespace Prisma {
   export const RoomChatScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    doctor: 'doctor',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    doctor: 'doctor'
   };
 
   export type RoomChatScalarFieldEnum = (typeof RoomChatScalarFieldEnum)[keyof typeof RoomChatScalarFieldEnum]
@@ -4421,16 +4422,16 @@ export namespace Prisma {
     NOT?: RoomChatWhereInput | RoomChatWhereInput[]
     id?: StringFilter<"RoomChat"> | string
     name?: StringFilter<"RoomChat"> | string
-    doctor?: StringFilter<"RoomChat"> | string
     createdAt?: DateTimeFilter<"RoomChat"> | Date | string
+    doctor?: StringFilter<"RoomChat"> | string
     messages?: MessageListRelationFilter
   }
 
   export type RoomChatOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    doctor?: SortOrder
     createdAt?: SortOrder
+    doctor?: SortOrder
     messages?: MessageOrderByRelationAggregateInput
   }
 
@@ -4441,16 +4442,16 @@ export namespace Prisma {
     OR?: RoomChatWhereInput[]
     NOT?: RoomChatWhereInput | RoomChatWhereInput[]
     name?: StringFilter<"RoomChat"> | string
-    doctor?: StringFilter<"RoomChat"> | string
     createdAt?: DateTimeFilter<"RoomChat"> | Date | string
+    doctor?: StringFilter<"RoomChat"> | string
     messages?: MessageListRelationFilter
   }, "id" | "name_doctor">
 
   export type RoomChatOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    doctor?: SortOrder
     createdAt?: SortOrder
+    doctor?: SortOrder
     _count?: RoomChatCountOrderByAggregateInput
     _max?: RoomChatMaxOrderByAggregateInput
     _min?: RoomChatMinOrderByAggregateInput
@@ -4462,8 +4463,8 @@ export namespace Prisma {
     NOT?: RoomChatScalarWhereWithAggregatesInput | RoomChatScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"RoomChat"> | string
     name?: StringWithAggregatesFilter<"RoomChat"> | string
-    doctor?: StringWithAggregatesFilter<"RoomChat"> | string
     createdAt?: DateTimeWithAggregatesFilter<"RoomChat"> | Date | string
+    doctor?: StringWithAggregatesFilter<"RoomChat"> | string
   }
 
   export type MessageWhereInput = {
@@ -4566,54 +4567,54 @@ export namespace Prisma {
   export type RoomChatCreateInput = {
     id?: string
     name: string
-    doctor: string
     createdAt?: Date | string
+    doctor: string
     messages?: MessageCreateNestedManyWithoutRoomChatInput
   }
 
   export type RoomChatUncheckedCreateInput = {
     id?: string
     name: string
-    doctor: string
     createdAt?: Date | string
+    doctor: string
     messages?: MessageUncheckedCreateNestedManyWithoutRoomChatInput
   }
 
   export type RoomChatUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    doctor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    doctor?: StringFieldUpdateOperationsInput | string
     messages?: MessageUpdateManyWithoutRoomChatNestedInput
   }
 
   export type RoomChatUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    doctor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    doctor?: StringFieldUpdateOperationsInput | string
     messages?: MessageUncheckedUpdateManyWithoutRoomChatNestedInput
   }
 
   export type RoomChatCreateManyInput = {
     id?: string
     name: string
-    doctor: string
     createdAt?: Date | string
+    doctor: string
   }
 
   export type RoomChatUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    doctor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    doctor?: StringFieldUpdateOperationsInput | string
   }
 
   export type RoomChatUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    doctor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    doctor?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageCreateInput = {
@@ -4747,22 +4748,22 @@ export namespace Prisma {
   export type RoomChatCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    doctor?: SortOrder
     createdAt?: SortOrder
+    doctor?: SortOrder
   }
 
   export type RoomChatMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    doctor?: SortOrder
     createdAt?: SortOrder
+    doctor?: SortOrder
   }
 
   export type RoomChatMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    doctor?: SortOrder
     createdAt?: SortOrder
+    doctor?: SortOrder
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -5094,15 +5095,15 @@ export namespace Prisma {
   export type RoomChatCreateWithoutMessagesInput = {
     id?: string
     name: string
-    doctor: string
     createdAt?: Date | string
+    doctor: string
   }
 
   export type RoomChatUncheckedCreateWithoutMessagesInput = {
     id?: string
     name: string
-    doctor: string
     createdAt?: Date | string
+    doctor: string
   }
 
   export type RoomChatCreateOrConnectWithoutMessagesInput = {
@@ -5139,15 +5140,15 @@ export namespace Prisma {
   export type RoomChatUpdateWithoutMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    doctor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    doctor?: StringFieldUpdateOperationsInput | string
   }
 
   export type RoomChatUncheckedUpdateWithoutMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    doctor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    doctor?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUpsertWithoutMessagesInput = {

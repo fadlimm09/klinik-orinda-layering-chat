@@ -12,9 +12,16 @@ export default function Home() {
   const { name } = useParams();
   const router = useRouter();
   const { openModal, selectedDoctor } = useModalStore();
-
   const { mutate, data, isError, isPending } = useFindRoomChat();
 
+  // Handle room redirect when data is available
+  useEffect(() => {
+    if (data && selectedDoctor) {
+      router.push(`/roomchat/${data.name}/${selectedDoctor}`);
+    }
+  }, [data, selectedDoctor, router]);
+
+  // Mutate when name and doctor are available
   useEffect(() => {
     if (name && selectedDoctor) {
       mutate({ name: name as string, doctor: selectedDoctor });
@@ -22,25 +29,11 @@ export default function Home() {
   }, [mutate, selectedDoctor, name]);
 
   const handleStartChat = () => {
-    openModal(); // buka modal pemilihan dokter
+    openModal();
   };
 
-  const handleRoomRedirect = () => {
-    if (data) {
-      router.push("/roomchat/" + data.name);
-    }
-  };
-
-  // Kondisi loading dan error
   if (isPending) return <div className="text-center mt-8">Loading...</div>;
   if (isError) return <div className="text-center text-red-500 mt-8">Failed to load data.</div>;
-
-  // Jika sudah ada data room, langsung redirect ke room chat
-  useEffect(() => {
-    if (data) {
-      handleRoomRedirect();
-    }
-  }, [data]);
 
   return (
     <>

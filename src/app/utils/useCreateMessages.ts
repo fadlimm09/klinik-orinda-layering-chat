@@ -13,13 +13,11 @@ export const useCreateMessages = () => {
 
   const mutation = useMutation({
     mutationFn: async (json: MessagePayload) => {
-      // <<< tambahkan 'json' di sini
       const response = await axios.post("/api/messages", json);
       console.log(response);
       return response.data;
     },
     onSuccess: () => {
-      console.log("Success booking");
       queryClient.invalidateQueries({ queryKey: ["messages"] });
     },
     onError: (error) => {

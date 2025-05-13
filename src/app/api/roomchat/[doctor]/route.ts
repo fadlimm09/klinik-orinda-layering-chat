@@ -3,11 +3,12 @@ import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest, { params }: { params: { doctor: string } }) {
   const { doctor } = await params;
+  const isDoctor = !doctor ? "dokterAgah" : doctor;
 
   try {
     const response = await prisma.roomChat.findMany({
       where: {
-        doctor: doctor,
+        doctor: isDoctor,
       },
       include: {
         messages: {

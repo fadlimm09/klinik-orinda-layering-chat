@@ -1,9 +1,8 @@
 import { NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
 
-// ✅ Gunakan jenis yang tepat: `req: NextRequest`, `context: { params: { doctor: string } }`
-export async function GET(req: NextRequest, context: { params: { doctor: string } }) {
-  const { doctor } = context.params;
+export async function GET(req: NextRequest, context: any) {
+  const doctor = context.params.doctor;
 
   try {
     const response = await prisma.roomChat.findMany({

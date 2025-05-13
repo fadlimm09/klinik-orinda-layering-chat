@@ -21,7 +21,6 @@ export const useCreateMessages = () => {
 
   const mutation = useMutation({
     mutationFn: async (json: createRoomChatPayload) => {
-      // <<< tambahkan 'json' di sini
       const response = await axios.post("/api/roomchat", json);
       console.log(response);
       return response.data;

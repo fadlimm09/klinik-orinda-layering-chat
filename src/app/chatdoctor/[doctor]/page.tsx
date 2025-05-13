@@ -39,22 +39,23 @@ export default function DoctorRoomChat() {
   const { mutate } = useCreateMessages();
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  const [activeRoom, setActiveRoom] = useState<RoomChat | null>(null);
+  const [activeRoomId, setActiveRoomId] = useState<string | null>(null);
   const [message, setMessage] = useState("");
 
-  // Set first room as active when available
+  const activeRoom = rooms?.find((room) => room.id === activeRoomId) || rooms?.[0] || null;
+
+  // Set room ID ke default saat rooms pertama kali tersedia
   useEffect(() => {
-    if (rooms?.length && !activeRoom) {
-      setActiveRoom(rooms[0]);
+    if (rooms?.length && !activeRoomId) {
+      setActiveRoomId(rooms[0].id);
     }
   }, [rooms]);
 
-  // Auto-scroll when messages change
+  // Auto-scroll ke bawah ketika pesan berubah
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [activeRoom?.messages]);
 
-  // Handle message submission
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!message.trim() || !activeRoom) return;
@@ -82,7 +83,12 @@ export default function DoctorRoomChat() {
             ${isDoctor ? "bg-white text-gray-800 rounded-tr-none" : "bg-green-500 text-white rounded-tl-none"}`}
         >
           <p>{msg.content}</p>
-          <div className={`text-[10px] mt-1 ${isDoctor ? "text-gray-500" : "text-green-100"}`}>{new Date(msg.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</div>
+          <div className={`text-[10px] mt-1 ${isDoctor ? "text-gray-500" : "text-green-100"}`}>
+            {new Date(msg.createdAt).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </div>
         </div>
       </div>
     );
@@ -100,14 +106,15 @@ export default function DoctorRoomChat() {
         </div>
         <div className="divide-y divide-gray-200">
           {rooms?.map((room) => (
-            <button key={room.id} onClick={() => setActiveRoom(room)} className={`w-full text-left p-3 hover:bg-gray-50 flex items-center gap-3 ${activeRoom?.id === room.id ? "bg-blue-50" : ""}`}>
+            <button key={room.id} onClick={() => setActiveRoomId(room.id)} className={`w-full text-left p-3 hover:bg-gray-50 flex items-center gap-3 ${activeRoom?.id === room.id ? "bg-blue-50" : ""}`}>
               <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gray-200">
                 <User2 className="w-10 h-10 text-gray-400" />
               </div>
               <div>
                 <p className="font-medium">{room.name}</p>
                 <p className="text-xs text-gray-500">
-                  {room.messages.length} message{room.messages.length !== 1 ? "s" : ""}
+                  {room.messages.length} message
+                  {room.messages.length !== 1 ? "s" : ""}
                 </p>
               </div>
             </button>

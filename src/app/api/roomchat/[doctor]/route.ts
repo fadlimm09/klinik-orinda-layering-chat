@@ -1,9 +1,9 @@
-// app/api/roomchat/[doctor]/route.ts
-import { type NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
+import { NextRequest } from "next/server";
 
-export async function GET(request: NextRequest, { params }: { params: { doctor: string } }) {
-  const { doctor } = params;
+export async function GET(req: NextRequest, { params }: { params: { doctor: string } }) {
+  const { doctor } = await params;
+
   try {
     const response = await prisma.roomChat.findMany({
       where: {

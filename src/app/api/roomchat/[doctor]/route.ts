@@ -1,14 +1,14 @@
 import { NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
 
-// ✅ Gunakan context sebagai argumen kedua dan destructure dari situ
+// ✅ Gunakan jenis yang tepat: `req: NextRequest`, `context: { params: { doctor: string } }`
 export async function GET(req: NextRequest, context: { params: { doctor: string } }) {
   const { doctor } = context.params;
 
   try {
     const response = await prisma.roomChat.findMany({
       where: {
-        doctor: doctor || "dokterAgah", // fallback jika perlu
+        doctor,
       },
       include: {
         messages: {

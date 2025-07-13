@@ -139,7 +139,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/alfitosantosa/projects/klinik-orinda-chat-layer/generated/prisma_client",
+      "value": "C:\\Users\\vinsm\\Desktop\\PROJECT-PI\\klinik-orinda-layering-chat\\generated\\prisma_client",
       "fromEnvVar": null
     },
     "config": {
@@ -148,7 +148,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "windows",
         "native": true
       },
       {
@@ -157,7 +157,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/alfitosantosa/projects/klinik-orinda-chat-layer/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\vinsm\\Desktop\\PROJECT-PI\\klinik-orinda-layering-chat\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -171,12 +171,11 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "postgresql://neondb_owner:npg_gdi3Lu9DceTW@ep-purple-fog-a1qj8vpq-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
       }
     }
   },

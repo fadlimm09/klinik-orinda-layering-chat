@@ -10,17 +10,17 @@ export default function NavigationMenuDemo() {
   return (
     <>
       <div className="flex items-center justify-between p-4 bg-green-50 ">
-        <Link href="https://klinik-orinda-avk8mb5ya.vercel.app//#" target="_blank">
+        <Link href="https://klinik-orinda-rujw.vercel.app/#" target="_blank">
           <Image src={logo} width={60} alt="logo" />
         </Link>
         <div className="flex items-center space-x-2">
-          <Link href="https://klinik-orinda-avk8mb5ya.vercel.app//#" target="_blank">
+          <Link href="https://klinik-orinda-rujw.vercel.app/#" target="_blank">
             <Button className="btn-primary">Home</Button>
           </Link>
-          <Link href="https://klinik-orinda-avk8mb5ya.vercel.app//consult/category" target="_blank">
+          <Link href="https://klinik-orinda-rujw.vercel.app/consult/category" target="_blank">
             <Button className="btn-primary">Konsultasi</Button>
           </Link>
-          <Link href="https://klinik-orinda-avk8mb5ya.vercel.app//jadwaldokter" target="_blank">
+          <Link href="https://klinik-orinda-rujw.vercel.app/jadwaldokter" target="_blank">
             <Button className="btn-primary">Jadwal Dokter</Button>
           </Link>
         </div>
